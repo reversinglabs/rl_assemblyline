@@ -12,13 +12,15 @@ ReversingLabs Spectra Intelligence service for AssemblyLine is a solution for ob
 ## Add the service to your deployment
 To install the ReversingLabs Spectra Intelligence service on your AssemblyLine do the following steps while on the AssemblyLine server :
 
-1. Using your web browser, go to the service management page: https://localhost/admin/services
+1. Follow this guide to add container to your deployment: https://cybercentrecanada.github.io/assemblyline4_docs/developer_manual/services/run_your_service/#add-the-container-to-your-deployment
 
-2. Click the **Add service** button
+2. Using your web browser, go to the service management page: https://localhost/admin/services
 
-3. Paste the entire content of the service_manifest.yaml file in the text box.
+3. Click the **Add service** button
 
-4. Click the **Add** button
+4. Paste the entire content of the service_manifest.yaml file in the text box.
+
+5. Click the **Add** button
 
 Your service information has been added to the system. The scaler component should automatically start a container of your newly created service.
 
