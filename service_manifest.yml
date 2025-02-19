@@ -1,0 +1,164 @@
+# Name of the service
+name: ReversingLabsSpectraIntelligence       # Has to follow Name defined in py, the main name class. 
+# Version of the service
+version: "4.5.0"    ## WARNING Follow the convention for versioning !! Otherwise, the Container wont start ###
+# Description of the service
+description: >
+  ReversingLabs-developed AssemblyLine service for obtaining File Reputation, AV Scanner and File Analysis results from Spectra Intelligence.
+
+# Regex defining the types of files the service accepts and rejects
+accepts: .*
+rejects: empty|metadata/.*
+
+# At which stage the service should run (one of: FILTER, EXTRACT, CORE, SECONDARY, POST)
+# NOTE: Stages are executed in the order defined in the list
+stage: FILTER
+# Which category the service is part of (one of: Antivirus, Dynamic Analysis, External, Extraction, Filtering, Networking, Static Analysis)
+category: Filtering
+
+# Does the service require access to the file to perform its task
+# If set to false, the service will only have access to the file metadata (e.g. Hashes, size, type, ...)
+file_required: true
+# Maximum execution time the service has before it's considered to be timed out
+timeout: 10
+# Does the service force the caching of results to be disabled
+# (only use for service that will always provided different results each run)
+disable_cache: true
+
+# is the service enabled by default
+enabled: true
+# does the service make APIs call to other product not part of the assemblyline infrastructure (e.g. VirusTotal, ...)
+is_external: true
+# Number of concurrent services allowed to run at the same time
+licence_count: 0
+
+# service configuration block (dictionary of config variables)
+# NOTE: The key names can be anything and the value can be of any types
+config:
+  Spectra Intelligence address: <https://{server}>
+  Spectra Intelligence username: <your_username>
+  Spectra Intelligence password: <your_password>
+
+# Enable tag-based structured output
+uses_tags: true
+uses_metadata: true
+uses_temp_submission_data: true
+
+# Define accepted tags to structure UI results properly
+tags:
+  - file.hash.md5
+  - file.hash.sha1
+  - file.hash.sha256
+  - behavior.description
+  - behavior.priority
+  - file.status
+  - threat.level
+  - threat.trust_factor
+  - attribution.actor
+  - attribution.implant
+  - attack.tactic
+  - attack.technique
+  - attack.tactic.*
+  - attack.technique.*
+  - file.config               # Added for file type from identification details.
+  - network.static.domain     # Added for associated domain (IPv4)
+  - source                    # Added to capture additional source tags from JSON
+
+
+# Service heuristic blocks: List of heuristics object that define the different heuristics used in the service
+# Used by MWP File reputation API
+heuristics:
+  - description: ReversingLabs UNKNOWN
+    filetype: "*"
+    heur_id: 0
+    name: ReversingLabs UNKNOWN
+    score: 0
+  - description: ReversingLabs KNOWN Trust Factor 0
+    filetype: "*"
+    heur_id: 1
+    name: ReversingLabs KNOWN Trust Factor 0
+    score: -1500
+  - description: ReversingLabs KNOWN Trust Factor 1
+    filetype: "*"
+    heur_id: 2
+    name: ReversingLabs KNOWN Trust Factor 1
+    score: -1000
+  - description: ReversingLabs KNOWN Trust Factor 2
+    filetype: "*"
+    heur_id: 3
+    name: ReversingLabs KNOWN Trust Factor 2
+    score: -800
+  - description: ReversingLabs KNOWN Trust Factor 3
+    filetype: "*"
+    heur_id: 4
+    name: ReversingLabs KNOWN Trust Factor 3
+    score: -500
+  - description: ReversingLabs KNOWN Trust Factor 4
+    filetype: "*"
+    heur_id: 5
+    name: ReversingLabs KNOWN Trust Factor 4
+    score: -300
+  - description: ReversingLabs KNOWN Trust Factor 5
+    filetype: "*"
+    heur_id: 6
+    name: ReversingLabs KNOWN Trust Factor 5
+    score: -100
+  - description: ReversingLabs SUSPICIOUS Threat Level 1
+    filetype: "*"
+    heur_id: 7
+    name: ReversingLabs SUSPICIOUS Threat Level 1
+    score: -100
+  - description: ReversingLabs SUSPICIOUS Threat Level 2
+    filetype: "*"
+    heur_id: 8
+    name: ReversingLabs SUSPICIOUS Threat Level 2
+    score: 200
+  - description: ReversingLabs MALICIOUS Threat Level 1
+    filetype: "*"
+    heur_id: 9
+    name: ReversingLabs MALICIOUS Threat Level 1
+    score: 300
+  - description: ReversingLabs MALICIOUS Threat Level 2
+    filetype: "*"
+    heur_id: 10
+    name: ReversingLabs MALICIOUS Threat Level 2
+    score: 400
+  - description: ReversingLabs SUSPICIOUS Threat Level 3
+    filetype: "*"
+    heur_id: 11
+    name: ReversingLabs SUSPICIOUS Threat Level 3
+    score: 500
+  - description: ReversingLabs SUSPICIOUS Threat Level 4
+    filetype: "*"
+    heur_id: 12
+    name: ReversingLabs SUSPICIOUS Threat Level 4
+    score: 700
+  - description: ReversingLabs SUSPICIOUS Threat Level 5
+    filetype: "*"
+    heur_id: 13
+    name: ReversingLabs SUSPICIOUS Threat Level 5
+    score: 900
+  - description: ReversingLabs MALICIOUS Threat Level 3
+    filetype: "*"
+    heur_id: 14
+    name: ReversingLabs MALICIOUS Threat Level 3
+    score: 1200
+  - description: ReversingLabs MALICIOUS Threat Level 4
+    filetype: "*"
+    heur_id: 15
+    name: ReversingLabs MALICIOUS Threat Level 4
+    score: 1800
+  - description: ReversingLabs MALICIOUS Threat Level 5
+    filetype: "*"
+    heur_id: 16
+    name: ReversingLabs MALICIOUS Threat Level 5
+    score: 2500
+
+# Docker configuration block which defines:
+#  - the name of the docker container that will be created
+#  - cpu and ram allocation by the container
+docker_config:
+  image: ${REGISTRY}reversinglabs/assemblyline-service-spectraintelligence:latest   # change this to your Docker registry path i.e. localhost:32000
+  allow_internet_access: true
+  cpu_cores: 1.0
+  ram_mb: 1024
