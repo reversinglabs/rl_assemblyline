@@ -10,7 +10,7 @@ ReversingLabs Spectra Intelligence service for AssemblyLine is a solution for ob
 - ReversingLabs Spectra Intelligence account
 
 ## Add the service to your deployment
-To install the ReversingLabs Spectra Intelligence service on your AssemblyLine do the following steps while on the AssemblyLine server :
+To install the ReversingLabs Spectra Intelligence service on your AssemblyLine do the following steps while on the AssemblyLine server:
 
 1. Follow this [Guide](https://cybercentrecanada.github.io/assemblyline4_docs/developer_manual/services/run_your_service/#add-the-container-to-your-deployment) to add container to your deployment
 
