@@ -158,7 +158,7 @@ heuristics:
 #  - the name of the docker container that will be created
 #  - cpu and ram allocation by the container
 docker_config:
-  image: ${REGISTRY}reversinglabs/assemblyline-service-spectraintelligence:latest   # change this to your Docker registry path i.e. localhost:32000 or public registry
+  image: reversinglabs/al-ticloud:latest # or change this to your private Docker registry path i.e. localhost:32000
   allow_internet_access: true
   cpu_cores: 1.0
   ram_mb: 1024
