@@ -1,7 +1,7 @@
 # Name of the service
 name: ReversingLabsSpectraIntelligence       # Has to follow Name defined in py, the main name class. 
 # Version of the service
-version: "4.5.0"    ## WARNING Follow the convention for versioning !! Otherwise, the Container wont start ###
+version: "4.5.0.stable"    ## WARNING Follow the convention for versioning !! Otherwise, the Container wont start ###
 # Description of the service
 description: >
   ReversingLabs-developed AssemblyLine service for obtaining File Reputation, AV Scanner and File Analysis results from Spectra Intelligence.
@@ -158,7 +158,7 @@ heuristics:
 #  - the name of the docker container that will be created
 #  - cpu and ram allocation by the container
 docker_config:
-  image: reversinglabs/al-ticloud:latest # or change this to your private Docker registry path i.e. localhost:32000
+  image: reversinglabs/al-ticloud:4.5.0.stable # or change this to your private Docker registry path i.e. localhost:32000
   allow_internet_access: true
   cpu_cores: 1.0
   ram_mb: 1024
