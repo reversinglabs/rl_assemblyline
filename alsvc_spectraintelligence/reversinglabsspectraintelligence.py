@@ -60,9 +60,6 @@ class ReversingLabsSpectraIntelligence(ServiceBase):
         # (A) Call File Analysis API and extract sections
         # ---------------------------------------------------------------------
 
-        # file_analysis_data = self.get_file_analysis_for_hash(sha1sum=sha1sum).json()
-        # sample = file_analysis_data["rl"].get("sample", {})
-
         try:
             analysis_result = self.get_file_analysis_for_hash(sha1sum=sha1sum)
             file_analysis_data = analysis_result.json()
@@ -77,21 +74,6 @@ class ReversingLabsSpectraIntelligence(ServiceBase):
             return
 
         sample = file_analysis_data["rl"].get("sample", {})
-
-        # analysis_result = self.get_file_analysis_for_hash(sha1sum=sha1sum)
-        # if analysis_result is None:
-        #     file_analysis_section = ResultSection("File Analysis")
-        #     file_analysis_section.add_line(
-        #         "No reference was found for this file. Please ensure that the file has been previously analyzed or resubmit for analysis."
-        #     )
-        #     file_analysis_section.auto_collapse = True
-        #     result.add_section(file_analysis_section)
-        #     request.result = result
-        #     return
-
-        # file_analysis_data = analysis_result.json()
-        # sample = file_analysis_data["rl"].get("sample", {})
-
 
         # 1. Story Section
         story_text = extract_story(file_analysis_data)
